@@ -15,12 +15,21 @@ app.get('/todolist/', (request, response) => {
   console.log('Received a GET request!');
   db.todolist.find((err, docs) => {
     console.log(docs);
+    if (err) {
+      response.send(err);
+    }
     response.json(docs);
   });
 });
+
 app.post('/todolist/', (request, response) => {
   console.log(request.body);
-  db.todolist.save(request.body, (err, docs) => {
+  db.todolist.save({
+    title: request.body.title,
+    text: request.body.text,
+    due: request.body.due,
+    status: 'Incomplete',
+  }, (err, docs) => {
     response.json(docs);
   });
 });
@@ -65,6 +74,21 @@ app.put('/todolist/:id', (request, response) => {
         },
       },
       new: true,
+    },
+    (err, doc) => {
+      response.json(doc);
+    });
+});
+
+app.post('/todolist/:status', (request, response) => {
+  db.todolist.update(
+    {
+      status: 'Uncomplete',
+    },
+    {
+      $set: {
+        status: 'Complete',
+      },
     },
     (err, doc) => {
       response.json(doc);
