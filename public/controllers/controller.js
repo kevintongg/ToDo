@@ -16,7 +16,7 @@ myApp.controller('AppCtrl', [
       window.location.reload();
     }
 
-    $scope.addContact = function () {
+    $scope.addTodo = function () {
       console.log($scope.todo);
       $http.post('/todolist/', $scope.todo).then((response) => {
         console.log(response);
@@ -26,7 +26,7 @@ myApp.controller('AppCtrl', [
 
     $scope.remove = function (id) {
       console.log(id);
-      $http.delete('/todolist/' + id).then(() => {
+      $http.delete(`/todolist/${id}`).then(() => {
         refresh();
       });
     };
@@ -46,8 +46,15 @@ myApp.controller('AppCtrl', [
 
     $scope.edit = function (id) {
       console.log(`ID: ${id}`);
-      $http.get('/todolist/' + id).then((response) => {
+      $http.get(`/todolist/${id}`).then((response) => {
         $scope.todo = response.data;
+      });
+    };
+
+    $scope.complete = function (status) {
+      $http.put(`/todolist/${status}`, $scope.todo).then((response) => {
+        console.log(response);
+        refresh();
       });
     };
   },
