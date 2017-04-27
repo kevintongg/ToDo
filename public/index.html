@@ -31,17 +31,17 @@
       <td><input class="form-control text-center" ng-model="todo.due"></td>
       <td/>
       <td class="text-center">
-        <button class="btn btn-primary" ng-click="addContact()">Add Todo</button>
+        <button class="btn btn-primary" ng-click="addTodo()">Add Todo</button>
         <button class="btn btn-info" ng-click="update()">Update</button>
         <button class="btn btn-info" ng-click="clear()">Clear</button>
       </td>
     </tr>
 
     <tr ng-repeat="todos in todoList">
-      <td class="text-center">{{todos.title}}</td>
-      <td class="text-center">{{todos.text}}</td>
-      <td class="text-center">{{todos.due}}</td>
-      <td class="text-center">{{todos.status}}</td>
+      <td class="text-center">{{ todos.title }}</td>
+      <td class="text-center">{{ todos.text }}</td>
+      <td class="text-center">{{ todos.due }}</td>
+      <td class="text-center">{{ todos.status }}</td>
       <td class="text-center">
         <button class="btn btn-danger" ng-click="remove(todos._id)">Remove</button>
         <button class="btn btn-warning" ng-click="edit(todos._id)">Edit</button>
